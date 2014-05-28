@@ -1,0 +1,53 @@
+mybatis-generator core page support for mysql
+
+If page support for Oracle, u should change sqlmap.xml handly. 
+
+1. selectByExample:
+
+  <select id="selectByExample" resultMap="BaseResultMap" parameterClass="com.XXX" >
+      <isNotNull property="limitClauseStart">
+          SELECT * FROM (SELECT A.*, ROWNUM RN FROM ( select
+      </isNotNull>
+      <isNull property="limitClauseStart">
+          select
+      </isNull>
+      <isParameterPresent>
+          <isEqual compareValue="true" property="distinct">
+              distinct
+          </isEqual>
+      </isParameterPresent>
+    <include refid="XXX.Base_Column_List" />
+    from XXXX
+    <isParameterPresent >
+      <include refid="XXX.Example_Where_Clause" />
+      <isNotNull property="orderByClause" >
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
+      <isNotNull property="limitClauseStart">
+          <![CDATA[) A WHERE ROWNUM <= ( #limitClauseStart:INTEGER# + #limitClauseCount:INTEGER#)) WHERE RN > #limitClauseStart:INTEGER#  ]]>
+      </isNotNull>
+  </select>
+
+2. insert & insertSelective
+
+  <insert id="insert" parameterClass="com.XXX" >
+    <selectKey resultClass="java.lang.Integer" keyProperty="resourceId" >
+      SEQ_XXX
+    </selectKey>
+
+---------------------
+How to use:
+1. import lib/mybatis-generator-core-pagesupport-xxx.jar to your project
+
+2. copy src/test and modify generatorConfig-mysql.xml to your own config
+
+3. run DaoGenerator. also modify mainPath in this class
+
+----------------------
+How to build:
+# cd $mybatis-generator-core-pagesupport
+# mvn clean compile install -Dmaven.test.skip=true
+
+It will generator mybatis-generator-core-pagesupport-XX.jar on target
+then you can use this jar in other project.

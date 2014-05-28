@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+      PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+      "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!-- 数据库驱动 -->
+	<!-- <classPathEntry location="ojdbc14.jar" /> -->
+	<classPathEntry location="lib\ojdbc14-10.2.0.3.jar" />
+
+	<!-- targetRuntime:生成代码的运行环境。由于我使用的是ibatis2所以选择Ibatis2Java5。 -->
+	<context id="oracleTables" targetRuntime="Ibatis2Java5">
+
+		<property name="ignoreQualifiersAtRuntime" value="true"></property>
+
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->  
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+
+		<!-- 数据库配置 -->
+		<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+			connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:orcl" userId="ERMS"
+			password="ERMS">
+		</jdbcConnection>
+
+
+		<javaTypeResolver type="MyJavaTypeResolverDefaultImpl">
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+
+		<!-- model配置 -->
+		<javaModelGenerator targetPackage="com.bs.basic.wireless.entity"
+			targetProject="E:/works/develop_frame/src">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+
+		<!-- xml配置 -->
+		<sqlMapGenerator targetPackage="com.bs.basic.wireless.entity"
+			targetProject="E:/works/develop_frame/src">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+
+		<javaClientGenerator type="SPRING"
+			targetPackage="com.bs.basic.wireless.dao"
+			targetProject="E:/works/develop_frame/src">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<!-- <table tableName="CM_CONTACT_GROUP" schema="youni" >
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<property name="suffixSupport" value="true" />
+			<generatedKey column="GROUP_ID" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" />
+		</table> -->
+		<!-- <table tableName="CM_CONTACT_GROUP_REL" schema="youni">
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+		</table> -->
+		
+		 <table tableName="TFILES" domainObjectName="Tfiles" schema="" >
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<!-- <property name="suffixSupport" value="true" /> -->
+		</table> 
+
+	</context>
+</generatorConfiguration>  

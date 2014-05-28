@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+      PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+      "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!-- 数据库驱动 -->
+	<!-- <classPathEntry location="ojdbc14.jar" /> -->
+
+	<!-- targetRuntime:生成代码的运行环境。由于我使用的是ibatis2所以选择Ibatis2Java5。 -->
+	<context id="MySqlTables" targetRuntime="Ibatis2Java5">
+
+		<property name="ignoreQualifiersAtRuntime" value="true"></property>
+
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->  
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+
+		<!-- 数据库配置 -->
+		<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+			connectionURL="jdbc:oracle:thin:@130.38.27.112:1521:netdb" userId="fjwoj"
+			password="fjwoj">
+		</jdbcConnection>
+
+
+		<javaTypeResolver type="MyJavaTypeResolverDefaultImpl">
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+
+		<!-- model配置 -->
+		<javaModelGenerator targetPackage="com.ailk.zjuniwoj.dal.model"
+			targetProject="/home/hadoop/IdeaProjects/fj-uni/mybatis-generator-core-pagesupport/src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+
+		<!-- xml配置 -->
+		<sqlMapGenerator targetPackage="com.ailk.zjuniwoj.dal.sql.oracle"
+			targetProject="/home/hadoop/IdeaProjects/fj-uni/mybatis-generator-core-pagesupport/src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+
+		<javaClientGenerator type="SPRING"
+			targetPackage="com.ailk.zjuniwoj.dal"
+			targetProject="/home/hadoop/IdeaProjects/fj-uni/mybatis-generator-core-pagesupport/src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		 <table tableName="pm_product_resource" domainObjectName="WojProductResource" schema="" >
+			<property name="ignoreQualifiersAtRuntime" value="true" />
+			<generatedKey column="resource_id" sqlStatement="SEQ_UNI_PRODUCT_RESOURCE" identity="true" />
+			<!-- <property name="suffixSupport" value="true" /> -->
+		</table> 
+
+	</context>
+</generatorConfiguration>  
